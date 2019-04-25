@@ -22,14 +22,15 @@ passport.use(
     }, (accessToken, refreshToken, profile, done) => {
         // passport callback function
         console.log('passport callback fired');
-        // console.log(profile);
+        console.log(profile);
 
         User.findOne({googleId: profile.id}).then((currentUser) => {
             if (!currentUser) {
                 // if not saved yet, create user in database
                 new User({
                     username: profile.displayName,
-                    googleId: profile.id
+                    googleId: profile.id,
+                    thumbnail: profile._json.picture
                 }).save().then((newUser) => {
                     console.log('New user creater: ' + newUser);
                     done(null, newUser);

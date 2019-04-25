@@ -49,14 +49,14 @@
                 <li><a href="/auth/login">Login</a></li>
                 <% } %>
                 <li><a href="/">Homepage</a></li>
-                <li><a href="/profile">Profile</a></li>
+                <li><a href="/profile"><b>Profile</b></a></li>
         </ul>
     </nav>
     <header>
         <h1>Welcome to your profile <%= user.username %></h1>
     </header>
     <main>
-        
+        <img src="<%= user.thumbnail %>" />
     </main>
 </body>
 </html>
