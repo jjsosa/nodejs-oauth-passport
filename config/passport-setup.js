@@ -13,11 +13,17 @@ passport.use(
         // passport callback function
         console.log('passport callback fired');
         // console.log(profile);
-        new User({
-            username: profile.displayName,
-            googleId: profile.id
-        }).save().then((newUser) => {
-            console.log('New user creater: ' + newUser);
+
+        User.findOne({googleId: profile.id}).then((currentUser) => {
+            if (!currentUser) {
+                // if not, create user in database
+                new User({
+                    username: profile.displayName,
+                    googleId: profile.id
+                }).save().then((newUser) => {
+                    console.log('New user creater: ' + newUser);
+                });
+            }
         });
     })
 );
